@@ -4,6 +4,7 @@ import win32com.client
 import pyttsx3
 import requests
 from openai import OpenAI
+import API_key
 
 # Set up speaker for text-to-speech
 speaker = win32com.client.Dispatch("SAPI.SpVoice")
@@ -63,7 +64,7 @@ def get_weather(query):
     # Extract city name from the command (e.g., "What's the weather in Bhubaneswar?")
     if "weather" or "temperature" in query and "in" in query:
         city_name = query.split("in")[-1].strip()  # Extract the city name after 'in'
-        api_key = 'ba80f49117e9a517983bf121633c5982'  # Replace with your API key
+        api_key = API_key.api_weather  # Replace with your API key
         base_url = "http://api.openweathermap.org/data/2.5/weather?"
         complete_url = f"{base_url}q={city_name}&appid={api_key}&units=metric"  # Use 'metric' for Celsius
 

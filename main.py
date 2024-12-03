@@ -1,9 +1,13 @@
 import webbrowser
+from idlelib.config_key import AVAILABLE_KEYS
+
 import speech_recognition as sr
 import win32com.client
 import requests
 from openai import OpenAI
 import spacy
+import API_key
+
 
 # Load spaCy model for intent detection
 nlp = spacy.load("en_core_web_sm")
@@ -59,7 +63,7 @@ def open_website(query):
 
 # Function to get weather
 def get_weather(city_name="Bhubaneswar"):
-    api_key = 'ba80f49117e9a517983bf121633c5982'
+    api_key = API_key.api_weather
     base_url = "http://api.openweathermap.org/data/2.5/weather?"
     complete_url = f"{base_url}q={city_name}&appid={api_key}&units=metric"
     response = requests.get(complete_url)
@@ -76,7 +80,7 @@ def get_weather(city_name="Bhubaneswar"):
 def get_nim_response(user_query):
     client = OpenAI(
         base_url="https://integrate.api.nvidia.com/v1",
-        api_key="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"
+        api_key=API_key.api_nims
     )
 
     try:
